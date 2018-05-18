@@ -1,0 +1,37 @@
+Documentation
+
+	jsdoc src/app/services/qlik-service.js -d documentation
+
+Compiling for Development
+
+	npm run watch-webpack-deploy-desktop
+
+Other Commands (e.g., building for prod)
+
+	build-webpack will bundle your code using Webpack and Babel allowing you to use ES6 in your extension source. It will also zip up the bundled files.
+
+	watch-webpack will watch your src directory and bundle and zip your code anytime a change is made.
+
+	build-vanilla will not bundle your code, but instead will zip up all source files as they are in the source.
+
+	watch-vanilla will watch your src directory and zip up all source files anytime a change is made.
+
+	deploy-server will deploy the zipped up extension file from the dist directory to the Qlik Sense Server.
+
+	deploy-desktop will deploy the zipped up extension file from the dist directory to the Qlik Sense Desktop extensions directory location.
+
+	build-webpack-deploy-server will bundle your code as in step #1 and then will deploy the resulting zip file to the server.
+
+	watch-webpack-deploy-server will watch and bundle your code as in step #2 and will deploy the resulting zip file to the server any time a change is made.
+
+	build-webpack-deploy-desktop will bundle your code as in step #1 and then will deploy the resulting zip file to the desktop.
+
+	watch-webpack-deploy-desktop will watch and bundle your code as in step #2 and will deploy the resulting zip file to the desktop any time a change is made.
+
+	build-vanilla-deploy-server will zip your code as in step #3 and then will deploy the resulting zip file to the server.
+
+	watch-vanilla-deploy-server will watch and zip your code as in step #4 and will deploy the resulting zip file to the server any time a change is made.
+
+	build-vanilla-deploy-desktop will zip your code as in step #3 and then will deploy the resulting zip file to the desktop.
+
+	watch-vanilla-deploy-desktop will watch and zip your code as in step #4 and will deploy the resulting zip file to the desktop any time a change is made.

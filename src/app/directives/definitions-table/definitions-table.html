@@ -1,0 +1,18 @@
+<div style="overflow: scroll; height: 100%; width: 100%; position: absolute;">
+	<table class="table table-responsive">
+		<thead class="thead-dark">
+			<tr>
+				<th ng-repeat="header in headers">
+					{{header}}
+				</th>
+			</tr>
+		<tbody>
+			<tr ng-repeat="item in items">
+				<td ng-repeat="header in headers" 
+						ng-style="{'background-color': colors[$parent.$index]}">
+					{{item[header]}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,32 @@
+<div style="overflow: scroll; height: 100%; width: 100%; position: absolute;">
+	<table class="table table-striped table-hover">
+		<tr>
+			<td ng-click="onClickFolderItem({type:'BACK'})" ng-if="navType !== 'CONNECTIONS'">
+				&#128193; &nbsp; &#x2191;				
+			</td>
+		</tr>
+		<tr ng-repeat="item in folderItems | filter: {type: 'CONNECTION'}: strict">
+			<td ng-click="onClickFolderItem(item)"> 
+				&#128279;
+				{{item.qName}} 
+			</td>
+		</tr>
+		<tr ng-repeat="item in folderItems | filter: {type: 'FOLDER'}: strict">
+			<td ng-click="onClickFolderItem(item)"> 
+				&#128193;
+				{{item.qName}} 
+			</td>
+		</tr>
+		<tr ng-repeat="item in folderItems | filter: {type:'FILE'}: strict">
+			<td ng-click="onClickFolderItem(item)"> 
+				{{item.qName}} 
+			</td>
+		</tr>
+		<tr ng-repeat="item in folderItems | filter: {type: 'TABLE'}: strict">
+			<td ng-click="onClickFolderItem(item)"> 
+				&#128462;
+				{{item.qName}} 
+			</td>
+		</tr>
+	</table>
+</div>

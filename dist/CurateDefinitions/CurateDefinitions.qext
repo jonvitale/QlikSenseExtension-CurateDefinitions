@@ -1,0 +1,7 @@
+{
+  "name": "Curate Definitions",
+  "description": "An extension to display, update, and create new definitions for Measures, Dimensions, Variables, and Visualizations.",
+  "type": "visualization",
+  "version": "0.1.0",
+  "author": "Jonathan Michael Vitale, The School District of Philadelphia"
+}

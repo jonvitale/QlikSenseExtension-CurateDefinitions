@@ -1,0 +1,56 @@
+<div>
+	<div ng-bind-html="message"></div>
+	<div ng-if="view === 'home'">
+		<button class="btn btn-primary" ng-click="onClickStart()">	
+				Display Current Definitions
+		</button>
+	</div>
+	<div ng-if="view === 'choose'">
+		<button class="btn btn-secondary" ng-click="onClickEnd()">	
+			Close Display
+		</button>
+		<span class="dropdown">
+			<button class="btn dropdown-toggle" style="background-color:#CCCCFF"
+					type="button" id="dropdownMenuButton_Definitions"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				{{definitionType}}
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_Definitions">
+				<a class="dropdown-item" ng-repeat="defType in definitionTypes">					
+					<div ng-click="onClickDefinitionDropdown(defType)">
+						{{defType}}
+					</div>					
+				</a>
+			</div>
+		</span>
+		<span class="dropdown" ng-if="definitionType === 'Visualizations'">
+			<button class="btn dropdown-toggle" style="background-color:#CCCCFF"
+					type="button" id="dropdownMenuButton_Visualizations"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				{{visualizationType}}
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_Visualizations">
+				<a class="dropdown-item" ng-repeat="visType in visualizationTypes">					
+					<div ng-click="onClickVisualizationDropdown(visType)">
+						{{visType}}
+					</div>					
+				</a>
+			</div>
+		</span>
+		<button class="btn btn-primary" type="button"
+				ng-click="displaySelectedType()">
+			<div>
+				Show {{type}}
+			</div>
+		</button>
+	</div>
+	<div ng-if="view === 'definitions'">
+		<button class="btn btn-secondary" ng-click="onClickEnd()">	
+				Close {{type}}
+		</button>
+		<button class="btn btn-success" ng-click="onClickDownload()">	
+				Download {{type}}
+		</button>
+    <definitions-table items="definitions" type="type" id='definitions-table'></definitions-table>
+	</div>
+</div>
