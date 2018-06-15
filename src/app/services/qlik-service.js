@@ -240,7 +240,18 @@ export default class QlikService {
 		return this.getSessionApp()
 		.then(sessionApp => {
 			this._sessionApp = sessionApp;
-			return sessionApp.model.engineApp.createConnection(connection);
+			return this._sessionApp.model.engineApp.getConnections();
+		}).then(connections => {
+			let qConnections = typeof connections.qConnections !== "undefined" ? connections.qConnections: [];
+			// check to see if we already have this connection, if not, make it
+			for (let i = 0; i < qConnections.length; i++){
+				if (qConnections[i].qConnectionString === connection.qConnectionString){
+					qConnections[i]["qConnectionId"] = qConnections[i]["qId"];
+					return qConnections[i];
+				}
+			}
+			// no matching connection has been found.
+			return this._sessionApp.model.engineApp.createConnection(connection);
 		})
 		.then(q => this.loadSessionApp(q.qConnectionId, pathArr, tableName, qDataFormat))
 		.then(() => this.getTableFromLoadedSessionApp())
@@ -273,7 +284,8 @@ export default class QlikService {
 				var i = 0;
 				var interval = setInterval(() => {
 					if (i < 40) {
-						if (this._sessionApp != null && typeof this._sessionApp.model !== 'undefined' && typeof this._sessionApp.model.engineApp !== 'undefined') {
+						if (this._sessionApp != null && typeof this._sessionApp.model !== 'undefined' && 
+								typeof this._sessionApp.model.engineApp !== 'undefined') {
 							clearInterval(interval);
 							resolve(this._sessionApp);
 						}

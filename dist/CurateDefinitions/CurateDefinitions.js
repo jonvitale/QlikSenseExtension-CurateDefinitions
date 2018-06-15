@@ -50314,7 +50314,18 @@ class QlikService {
 		// to get a table we have to do a round-about crazy thing opening a session app, creating a load script and loading the table
 		return this.getSessionApp().then(sessionApp => {
 			this._sessionApp = sessionApp;
-			return sessionApp.model.engineApp.createConnection(connection);
+			return this._sessionApp.model.engineApp.getConnections();
+		}).then(connections => {
+			let qConnections = typeof connections.qConnections !== "undefined" ? connections.qConnections : [];
+			// check to see if we already have this connection, if not, make it
+			for (let i = 0; i < qConnections.length; i++) {
+				if (qConnections[i].qConnectionString === connection.qConnectionString) {
+					qConnections[i]["qConnectionId"] = qConnections[i]["qId"];
+					return qConnections[i];
+				}
+			}
+			// no matching connection has been found.
+			return this._sessionApp.model.engineApp.createConnection(connection);
 		}).then(q => this.loadSessionApp(q.qConnectionId, pathArr, tableName, qDataFormat)).then(() => this.getTableFromLoadedSessionApp()).then(table => Promise.resolve({
 			type: 'DEFINITIONS',
 			items: table
